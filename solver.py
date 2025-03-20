@@ -82,8 +82,12 @@ class Solver(object):
                                               mode='thre',
                                               dataset=self.dataset)
 
-        self.build_model()
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        for i, (input_data, labels) in enumerate(self.train_loader):
+            input = input_data.float().to(self.device)
+            print(input)
+
+        self.build_model()
         self.criterion = nn.MSELoss()
 
     def build_model(self):
